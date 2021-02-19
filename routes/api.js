@@ -283,116 +283,6 @@ router.get('/remove', (req, res, next) => {
     }
 })
 
-router.get('/covid-indo', async (req, res, next) => {
-    var apikeyInput = req.query.apikey
-	if(!apikeyInput) return res.json(loghandler.notparam)
-	a = await zahirr.findOne({apikey:apikeyInput}) ? true : false
-	if(a == true) return res.json(loghandler.invalidKey)
-
-    fetch(encodeURI(`https://api.kawalcorona.com/indonesia`))
-        .then(response => response.json())
-        .then(data => {
-            res.json({
-                status: true,
-                creator: `${creator}`,
-                result: {
-                    positif: `${data[0].positif}`,
-                    sembuh: `${data[0].sembuh}`,
-                    dirawat: `${data[0].dirawat}`,
-                    meninggal: `${data[0].meninggal}`,
-                },
-                message: "Tetap jalani protokol kesehatan dan Semangattt"
-            })
-        })
-})
-
-router.get('/igdown', async (req, res, next) => {
-    var apikeyInput = req.query.apikey,
-        url = req.query.url
-
-    if (!url) return res.json(loghandler.noturl)
-	if(!apikeyInput) return res.json(loghandler.notparam)
-	if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
-
-    var str = url
-    var potong = str.split('?')
-    var graph = "?__a=1"
-    var potong2 = potong[0] + graph
-
-    fetch(encodeURI(potong2))
-        .then(response => response.json())
-        .then(data => {
-            var validasi = data["graphql"]["shortcode_media"]["__typename"];
-            if (validasi == "GraphVideo") {
-                var link = data.graphql.shortcode_media.video_url;
-                res.json({
-                    status: true,
-                    creator: `${creator}`,
-                    result: {
-                        type: "Video",
-                        url: link
-                    },
-                    message: "jangan lupa follow" + creator
-                })
-            } else if (validasi == "GraphImage") {
-                var link = data.graphql.shortcode_media.display_url;
-                res.json({
-                    status: true,
-                    creator: `${creator}`,
-                    result: {
-                        type: "Picture",
-                        url: link
-                    },
-                    message: "jangan lupa follow" + creator
-                })
-            } else {
-                res.json({
-                    status: false,
-                    creator: `${creator}`,
-                    message: "mungkin terjadi error"
-                })
-            }
-        })
-        .catch(e => {
-            console.log('Error:', color(e,'red'))
-            res.json({status:false,creator: `${creator}`, message: "gagal, pastikan url anda benar:)"})
-       })
-})
-
-router.get('/igstalk', async (req, res, next) => {
-    var apikeyInput = req.query.apikey,
-        username = req.query.username
-
-	if(!apikeyInput) return res.json(loghandler.notparam)
-	if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
-    if (!username) return res.json(loghandler.notusername)
-
-    fetch(encodeURI(`https://www.instagram.com/${username}/?__a=1`))
-        .then(response => response.json())
-        .then(data => {
-             var bisnis_or = data.graphql.user.is_business_account == false ? "bukan bisnis": "ini bisnis"
-             var verif_or =  data.graphql.user.is_verified == false ? "belum verified / centang biru": "sudah verified / centang biru"
-             var response = {
-                 status: true,
-                 creator: `${creator}`,
-                 result: {
-                      username: `${data.graphql.user.username}`,
-                      name: `${data.graphql.user.full_name}`,
-                      biodata: `${data.graphql.user.biography}`,
-                      followers: `${data.graphql.user.edge_followed_by.count}`,
-                      following:`${data.graphql.user.edge_follow.count}`,
-                      verified: verif_or,
-                      business_account: bisnis_or,
-                      post: `${data.graphql.user.edge_owner_to_timeline_media.count}`,
-                      profile_picture: `${data.graphql.user.profile_pic_url}`,
-                      profile_picture_hd: `${data.graphql.user.profile_pic_url_hd}`,
-                 },
-                 message: `jangan lupa follow ${creator}`
-             }
-             res.json(response)
-        })
-})
-
 router.get('/tiktod', async (req, res, next) => {
     var apikeyInput = req.query.apikey,
         url = req.query.url
@@ -448,7 +338,7 @@ router.get('/randomquote', (req, res, next) => {
     if (!apikey) return res.json(loghandler.notparam)
     if (apikey != 'zahirgans') return res.json(loghandler.invalidKey)
 
-    fetch(encodeURI(`https://mhankbarbar.tech/api/randomquotes`))
+    fetch(encodeURI(`https://python-api-zhirrr.herokuapp.com/api/random/quotes`))
         .then(response => response.json())
         .then(data => {
              res.json({
@@ -462,44 +352,6 @@ router.get('/randomquote', (req, res, next) => {
              })
          })
          .catch(e => {})
-})
-
-
-router.get('/randomloli', (req, res, next) => {
-    var apikey = req.query.apikey
-
-    if (!apikey) return res.json(loghandler.notparam)
-    if (apikey != 'zahirgans') return res.json(loghandler.invalidKey)
-
-    try {
-        var options = {
-            url: "http://results.dogpile.com/serp?qc=images&q= " + "Loli",
-            method: "GET",
-            headers: {
-                "Accept": "text/html",
-                "User-Agent": "Chrome"
-            }
-        }
-
-        request(options, function(error, response, responseBody) {
-            if (error) return
-
-            $ = cheerio.load(responseBody)
-            var links = $(".image a.link")
-            var cari = new Array(links.length).fill(0).map((v, i) => links.eq(i).attr("href"))
-
-            if (!cari.length) return
-            var hasil = cari[Math.floor(Math.random() * cari.length)]
-
-            res.json({
-                status : true,
-                creator : `${creator}`,
-                result : {
-                    image : 'mme',
-                },
-                message : `jangan lupa follow ${creator}`})
-            })
-    } catch (e) {}
 })
 
 router.get('/infonpm', async (req, res, next) => {
@@ -528,13 +380,12 @@ router.get('/infonpm', async (req, res, next) => {
 })
 
 
-router.get('/shorturl/tinyurl', async (req, res, next) => {
+router.get('/short/tiny', async (req, res, next) => {
     var apikeyInput = req.query.apikey,
         url = req.query.url
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
-	a = await zahirr.findOne({apikey:apikeyInput}) ? true : false
-	if(a == false) return res.json(loghandler.invalidKey)
+	if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
      if (!url) return res.json(loghandler.noturl)
 
      request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
@@ -554,30 +405,6 @@ router.get('/shorturl/tinyurl', async (req, res, next) => {
      })
 })
 
-
-router.get('/texttoimg2', (req, res, next) => {
-     var apikey = req.query.apikey,
-         text = req.query.text
-
-     if (!apikey) return res.json(loghandler.notparam)
-     if (!text) return res.json(loghandler.nottext)
-     if (apikey != 'zahirgans') return res.json(loghandler.invalidKey)
-
-     fetch(encodeURI(`https://mhankbarbar.tech/api/text2image?text=${text}&apiKey=${apiBar}`))
-         .then(response => response.json())
-         .then(data => {
-             res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result : {
-                     image : `${data.result}`,
-                     text : `${text}`
-                 },
-                 message : `jangan lupa follow ${creator}`
-             })
-         })
-})
-
 router.get('/vokal', async (req, res, next) => {
 	var text = req.query.text,
 	       apikeyInput = req.query.apikey,
@@ -593,7 +420,7 @@ router.get('/vokal', async (req, res, next) => {
 			status: true,
 			creator: creator,
 			result,
-			message: 'jangan lupa follow ' + creator
+			message: 'jgn lupa follow zhirr_ajalah'
 		})
 		})
 		.catch(err => {
@@ -655,6 +482,7 @@ router.get('/base', async (req, res, next) => {
 				res.json(loghandler.error)
 			}
 })
+
 router.get('/nulis', async (req, res, next) => {
 	var text = req.query.text,
 		 apikeyInput = req.query.apikey;
