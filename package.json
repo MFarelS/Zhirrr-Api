@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Zhirrr/NodeJS-Api.git"
+    "url": "git+https://github.com/Zhirrr/Zhirrr-Api.git"
   },
   "keywords": [
     "simple",
@@ -20,7 +20,7 @@
   "author": "Zhirrr",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Zhirrr/NodeJS-Api/issues"
+    "url": "https://github.com/Zhirrr/Zhirrr-Api/issues"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -45,5 +45,5 @@
     "ytdl-core": "^4.4.5",
     "ytpl": "^2.0.5"
   },
-  "homepage": "https://github.com/Zhirrr/NodeJS-Api#readme"
+  "homepage": "https://github.com/Zhirrr/Zhirrr-Api#readme"
 }
