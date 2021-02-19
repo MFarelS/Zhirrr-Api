@@ -20,6 +20,7 @@
 | Short Link | ✔️ |
 | Text Maker | ✔️ |
 | Text Maker Game | ✔️ |
+| Text Maker Senja | ✔️ |
 
 ## 🛠️ Endpoint-Api
 | Menu | Endpoint | 
@@ -28,12 +29,14 @@
 | Tiktok Downloader | api/tiktod/?url=MASUKIN_URL&apikey=MASUKIN_APIKEY |
 | Tiktok Stalk | api/tiktod/stalk/?username=MASUKIN_URL&apikey=MASUKIN_APIKEY |
 | Random Quotes | api/randomquote?apikey=MASUKIN_APIKEY |
+| Info NPM | api/infonpm?query=zhirrr-api&hostname=zhirrr&apikey=MASUKAN_APIKEY |
+| Short Link | api/short/tiny?url=google.com&apikey=MASUKAN_APIKEY |
 | Text Maker Glitch | api/textmaker?text=halo&text2=hai&theme=glitch&apikey=MASUKIN_APIKEY |
 | Text Maker Google Suggestion | api/textmaker?text=halo&text2=hai&text3=gwganteng&theme=google-suggestion&apikey=MASUKIN_APIKEY |
 | Text Maker PUBG | api/textmaker/game?text=halo&text2=hai&theme=pubg&apikey=MASUKIN_APIKEY |
 | Text Maker BattleField | api/textmaker/game?text=halo&text2=hai&theme=battlefield&apikey=MASUKIN_APIKEY |
-| Info NPM | api/infonpm?query=zhirrr-api&hostname=zhirrr&apikey=MASUKAN_APIKEY |
-| Short Link | api/short/tiny?url=google.com&apikey=MASUKAN_APIKEY |
+| Text Maker Coffee Cup | api/textmaker/senja?text=Zhirrr&theme=coffee-cup&apikey=MASUKIN_APIKEY |
+| Text Maker Coffee Cup 2 | api/textmaker/senja?text=Zhirrr&theme=coffee-cup2&apikey=MASUKIN_APIKEY |
 
 ## Cara Ganti ApiKey Gimana?
 Cara Mengganti Nya Cukup Gampang, Kalian Hanya Perlu Untuk Mengganti Syntax Di Bawah Ini
