@@ -128,7 +128,6 @@ loghandler = {
     }
 }
 
-//START RANDOM
 var len = 15
         var arr = '123456789abcdefghijklmnopqrstuvwxyz'
         var random = '';
@@ -146,9 +145,6 @@ var len = 15
 
         var randomTextNumber = random+randomlagi+'---------ZahirGanteng'+'ZHIRRR--GANS';
         
- //END RANDOM 
- 
- //FUNCTION
  
  async function cekApiKey(api) {
  	ap = await zahirr.findOne({apikey:api})
@@ -338,7 +334,7 @@ router.get('/randomquote', (req, res, next) => {
     if (!apikey) return res.json(loghandler.notparam)
     if (apikey != 'zahirgans') return res.json(loghandler.invalidKey)
 
-    fetch(encodeURI(`https://python-api-zhirrr.herokuapp.com/api/random/quotes`))
+    fetch(encodeURI(`https://mhankbarbar.tech/api/randomquotes`))
         .then(response => response.json())
         .then(data => {
              res.json({
@@ -410,8 +406,7 @@ router.get('/vokal', async (req, res, next) => {
 	       apikeyInput = req.query.apikey,
 	       huruf_vokal = req.query.huruf;
 	if(!apikeyInput) return res.json(loghandler.notparam)
-	 a = await zahirr.findOne({apikey:apikeyInput}) ? true : false
-     if(a == false) return res.json(loghandler.invalidKey)
+     if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
 	 if(!(text && huruf_vokal)) return res.json(loghandler.notvokal)
 	
 	Vokal(text,huruf_vokal)
