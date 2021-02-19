@@ -16,6 +16,8 @@
 | Tiktok Downloader | ✔️ |
 | Tiktok Stalk | ✔️ |
 | Random Quotes | ✔️ |
+| Info NPM | ✔️ |
+| Short Link | ✔️ |
 | Text Maker | ✔️ |
 | Text Maker Game | ✔️ |
 
@@ -30,6 +32,8 @@
 | Text Maker Google Suggestion | api/textmaker?text=halo&text2=hai&text3=gwganteng&theme=google-suggestion&apikey=MASUKIN_APIKEY |
 | Text Maker PUBG | api/textmaker/game?text=halo&text2=hai&theme=pubg&apikey=MASUKIN_APIKEY |
 | Text Maker BattleField | api/textmaker/game?text=halo&text2=hai&theme=battlefield&apikey=MASUKIN_APIKEY |
+| Info NPM | api/infonpm?query=zhirrr-api&hostname=zhirrr&apikey=MASUKAN_APIKEY |
+| Short Link | api/short/tiny?url=google.com&apikey=MASUKAN_APIKEY |
 
 ## Cara Ganti ApiKey Gimana?
 Cara Mengganti Nya Cukup Gampang, Kalian Hanya Perlu Untuk Mengganti Syntax Di Bawah Ini
@@ -46,4 +50,4 @@ if(apikey != 'MASUKAN_NAMA_APIKEY') return res.json(loghandler.invalidKey)
 * https://docs-api-zahirr.herokuapp.com
 - Gunakan Parameter Yg Sama Yak :)
 - 100 % Open Source
-- Rate This Repository Ok 🎉
+- Rate This Repository Okeee 🎉
