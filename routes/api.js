@@ -103,7 +103,7 @@ loghandler = {
         status: false,
         creator: `${creator}`,
         code: 406,
-        message: 'apikey invalid.'
+        message: 'apikey invalid, gak punya apikey? chat gw aja yaaa di wa.me/6283898698875 , key nya gratis kok gan, jadi santuyy ajaa'
     },
     invalidlink: {
         status: false,
@@ -402,14 +402,14 @@ router.get('/short/tiny', async (req, res, next) => {
 })
 
 router.get('/vokal', async (req, res, next) => {
-	var text = req.query.text,
+	var str = req.query.text,
 	       apikeyInput = req.query.apikey,
-	       huruf_vokal = req.query.huruf;
+	       huruf = req.query.huruf;
 	if(!apikeyInput) return res.json(loghandler.notparam)
      if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
-	 if(!(text && huruf_vokal)) return res.json(loghandler.notvokal)
+	 if(!(str && huruf)) return res.json(loghandler.notvokal)
 	
-	Vokal(text,huruf_vokal)
+	Vokal(str,huruf)
 	.then(result => {
 		res.json({
 			status: true,
