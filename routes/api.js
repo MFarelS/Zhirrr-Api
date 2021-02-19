@@ -401,28 +401,6 @@ router.get('/short/tiny', async (req, res, next) => {
      })
 })
 
-router.get('/vokal', async (req, res, next) => {
-	var str = req.query.text,
-	       apikeyInput = req.query.apikey,
-	       huruf = req.query.huruf;
-	if(!apikeyInput) return res.json(loghandler.notparam)
-     if(apikeyInput != 'zahirgans') return res.json(loghandler.invalidKey)
-	 if(!(str && huruf)) return res.json(loghandler.notvokal)
-	
-	Vokal(str,huruf)
-	.then(result => {
-		res.json({
-			status: true,
-			creator: creator,
-			result,
-			message: 'jgn lupa follow zhirr_ajalah'
-		})
-		})
-		.catch(err => {
-			res.json(loghandler.error)
-			})
-		})
-
 router.get('/base', async (req, res, next) => {
 	var type = req.query.type,
 		encode = req.query.encode,
